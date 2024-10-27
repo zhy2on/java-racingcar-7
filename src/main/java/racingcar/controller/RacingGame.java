@@ -1,6 +1,9 @@
-package racingcar;
+package racingcar.controller;
 
 import java.util.stream.IntStream;
+import racingcar.domain.Cars;
+import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
 public class RacingGame {
 
