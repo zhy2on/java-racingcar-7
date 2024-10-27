@@ -29,7 +29,6 @@ public class Car {
         if (isMovable()) {
             this.distance++;
         }
-        System.out.println(name + " : " + "-".repeat(distance));
     }
 
     private void validateName(final String name) {
