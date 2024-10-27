@@ -1,35 +1,31 @@
 package racingcar;
 
-import java.util.List;
 import java.util.stream.IntStream;
 
 public class RacingGame {
 
-    private Cars cars;
     private final InputView inputView;
+    private final OutputView outputView;
 
     public RacingGame() {
         this.inputView = new InputView();
+        this.outputView = new OutputView();
     }
 
     public void run() {
         String carNames = inputView.readCarNames();
-        this.cars = new Cars(carNames);
+        Cars cars = new Cars(carNames);
         int tryCount = inputView.readTryCount();
-        moveCars(tryCount);
-        printWinners();
+
+        outputView.printGameStart();
+        playGame(cars, tryCount);
+        outputView.printWinners(cars.getWinners());
     }
 
-    private void moveCars(final int cnt) {
-        System.out.println("실행 결과");
-        IntStream.range(0, cnt).forEach(i -> {
+    private void playGame(final Cars cars, final int tryCount) {
+        IntStream.range(0, tryCount).forEach(i -> {
             cars.moveAll();
-            System.out.println();
+            outputView.printRoundResult(cars);
         });
-    }
-
-    private void printWinners() {
-        List<String> winners = cars.getWinners();
-        System.out.println("최종 우승자 : " + String.join(", ", winners));
     }
 }
