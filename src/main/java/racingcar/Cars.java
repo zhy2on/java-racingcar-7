@@ -8,7 +8,7 @@ public class Cars {
 
     private final List<Car> cars;
 
-    public Cars(String input) {
+    public Cars(final String input) {
         this.cars = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Car::new)
