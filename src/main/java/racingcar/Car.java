@@ -26,8 +26,7 @@ public class Car {
     }
 
     public void move() {
-        int random = Randoms.pickNumberInRange(MIN_RANDOM, MAX_RANDOM);
-        if (random >= FORWARD_THRESHOLD) {
+        if (isMovable()) {
             this.distance++;
         }
         System.out.println(name + " : " + "-".repeat(distance));
@@ -41,5 +40,9 @@ public class Car {
         if (name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
         }
+    }
+
+    private boolean isMovable() {
+        return Randoms.pickNumberInRange(MIN_RANDOM, MAX_RANDOM) >= FORWARD_THRESHOLD;
     }
 }
