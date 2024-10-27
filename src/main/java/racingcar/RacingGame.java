@@ -14,16 +14,30 @@ public class RacingGame {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String input = Console.readLine();
 
-        System.out.println("시도할 횟수는 몇 회인가요?");
-        int cnt = Integer.parseInt(Console.readLine());
-
         generateCars(input);
+
+        System.out.println("시도할 횟수는 몇 회인가요?");
+        int cnt = validateAndParseCountInput(Console.readLine());
+
         moveCars(cnt);
         printWinners();
     }
 
+    private int validateAndParseCountInput(String input) {
+        try {
+            int cnt = Integer.parseInt(input);
+            if (cnt < 0) {
+                throw new IllegalArgumentException("시도 횟수는 0보다 커야 합니다.");
+            }
+            return cnt;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("시도 횟수는 숫자여야 합니다.");
+        }
+    }
+
     private void generateCars(final String input) {
         this.cars = Arrays.stream(input.split(","))
+                .map(String::trim)
                 .map(Car::new)
                 .collect(Collectors.toList());
     }
