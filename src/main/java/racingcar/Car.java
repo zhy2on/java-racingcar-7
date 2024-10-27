@@ -8,6 +8,7 @@ public class Car {
     private int moveCount = 0;
 
     public Car(final String name) {
+        validateName(name);
         this.name = name;
     }
 
@@ -25,5 +26,15 @@ public class Car {
             this.moveCount++;
         }
         System.out.println(name + " : " + "-".repeat(moveCount));
+    }
+
+    private void validateName(final String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("자동차 이름은 빈 값일 수 없습니다.");
+        }
+
+        if (name.length() > 5) {
+            throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+        }
     }
 }
