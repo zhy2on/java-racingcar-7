@@ -2,17 +2,16 @@ package racingcar;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cars {
 
     private final List<Car> cars;
 
     public Cars(final String input) {
-        this.cars = Arrays.stream(input.split(","))
+        this.cars = Arrays.stream(input.split(",", -1))
                 .map(String::trim)
                 .map(Car::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Car> getCars() {
@@ -28,7 +27,7 @@ public class Cars {
         return cars.stream()
                 .filter(car -> car.getDistance() == maxDistance)
                 .map(Car::getName)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private int getMaxDistance() {
